@@ -6,6 +6,7 @@ class TicTacToe:
         self.board_vector=[[' ' for j in range(size)] for i in range(size)]
         self.winner=None
         self.state='Pending'
+        self.totick='x'
         self.win_condition=self.win_conculate()
         self.is_gameover=self.is_gameovered()
     
@@ -40,17 +41,30 @@ class TicTacToe:
         x=pos[1]
         y=pos[0]
         if self.board_vector[x][y]==' ' and not self.is_gameover:
-            self.board_vector[x][y]=self.icons[len(self.logs)%2]
+            self.totick=self.icons[len(self.logs)%2]
+            self.board_vector[x][y]=self.totick
             self.logs.append((x,y))
             self.is_gameover=self.is_gameovered()
             return 1
         else:
             return 0
+    
+    def get_tickable(self):
+        moveable=[]
+        for i in range(self.size):
+            for j in range(self.size):
+                if self.board_vector[i][j]==' ':
+                    moveable.append((j,i))
+        return moveable
 
     # loading from logs for faster coding
     def load_logs(self,logs):
         for i in logs:
             self.ticking(i)
+    
+    # def load_pos(self,posdict:dict):
+    #     for key,item in posdict.items():
+    #         self.ticking
 
 # example
 
