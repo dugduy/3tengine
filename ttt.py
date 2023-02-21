@@ -49,7 +49,7 @@ class TicTacToe:
             # print(1)
             self.totick=self.icons[len(self.logs)%2]
             self.board_vector[x][y]=self.totick
-            self.logs.append((x,y))
+            self.logs.append((y,x)) #because it is resversed
             self.is_gameover=self.is_gameovered()
             return 1
         else:
