@@ -1,7 +1,7 @@
 class TicTacToe:
     def __init__(self,size=3,logs:list=[]) -> None:
         self.size=size
-        self.logs=logs
+        self.logs=[]
         self.icons=['x','o']
         self.board_vector=[[' ' for j in range(size)] for i in range(size)]
         self.winner=None
@@ -9,6 +9,7 @@ class TicTacToe:
         self.totick='x'
         self.win_condition=self.win_conculate()
         self.is_gameover=self.is_gameovered()
+        self.load_logs(logs)
     
     def win_conculate(self):
         row_win=[[(i,j) for j in range(self.size)] for i in range(self.size)]
@@ -59,6 +60,7 @@ class TicTacToe:
 
     # loading from logs for faster coding
     def load_logs(self,logs):
+        self.logs=[]
         for i in logs:
             self.ticking(i)
     
