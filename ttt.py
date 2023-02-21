@@ -3,13 +3,16 @@ class TicTacToe:
         self.size=size
         self.logs=[]
         self.icons=['x','o']
-        self.board_vector=[[' ' for j in range(size)] for i in range(size)]
         self.winner=None
         self.state='Pending'
         self.totick='x'
+        self.reset_board_vector()
         self.win_condition=self.win_conculate()
         self.is_gameover=self.is_gameovered()
         self.load_logs(logs)
+    
+    def reset_board_vector(self):
+        self.board_vector=[[' ' for j in range(self.size)] for i in range(self.size)]
     
     def win_conculate(self):
         row_win=[[(i,j) for j in range(self.size)] for i in range(self.size)]
@@ -22,6 +25,7 @@ class TicTacToe:
         print('-'*20)
         for i in self.board_vector:
             print(i)
+        print('-'*20)
     
     def is_gameovered(self):
         for i in self.win_condition:
@@ -42,6 +46,7 @@ class TicTacToe:
         x=pos[1]
         y=pos[0]
         if self.board_vector[x][y]==' ' and not self.is_gameover:
+            # print(1)
             self.totick=self.icons[len(self.logs)%2]
             self.board_vector[x][y]=self.totick
             self.logs.append((x,y))
@@ -59,10 +64,17 @@ class TicTacToe:
         return moveable
 
     # loading from logs for faster coding
-    def load_logs(self,logs):
+    def load_logs(self,logs,restart=1):
+        self.reset_board_vector()
+        print('Logs loading...')
         self.logs=[]
+        self.is_gameover=not restart
+
+        loading_result=[]
         for i in logs:
-            self.ticking(i)
+            loading_result.append(self.ticking(i))
+        print('Logs loaded!')
+        return loading_result
     
     # def load_pos(self,posdict:dict):
     #     for key,item in posdict.items():
